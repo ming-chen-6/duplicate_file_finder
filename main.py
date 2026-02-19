@@ -2,7 +2,7 @@ import os
 
 from tqdm import tqdm
 
-from src.duplicate_finder import (
+from src.duplicate_organizer import (
     ScanConfig,
     find_all_duplicate_files,
     generate_report,
@@ -56,7 +56,7 @@ def _review_and_execute(report_path):
 
 if __name__ == '__main__':
     try:
-        print('Duplicate File Finder')
+        print('Duplicate File Organizer\n')
         print('  1. New scan')
         print('  2. Resume previous scan')
         print('  3. Load report file')

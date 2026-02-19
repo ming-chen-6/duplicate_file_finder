@@ -83,6 +83,29 @@ def remove_missing_files(conn, existing_paths):
         conn.commit()
 
 
+def validate_checkpoint(root_dir):
+    '''Check if a valid checkpoint database exists in the given directory.
+
+    Parameters:
+        root_dir: The root directory to check for .dupfinder_cache.db.
+
+    Returns:
+        True if the database exists and contains at least one scanned file row.
+        False otherwise.
+    '''
+    db_path = os.path.join(root_dir, DB_FILENAME)
+    if not os.path.exists(db_path):
+        return False
+    try:
+        conn = sqlite3.connect(db_path)
+        cursor = conn.execute('SELECT COUNT(*) FROM scanned_files')
+        count = cursor.fetchone()[0]
+        conn.close()
+        return count > 0
+    except Exception:
+        return False
+
+
 def clear_checkpoint(root_dir):
     '''Delete the checkpoint database file entirely.
 

@@ -70,7 +70,7 @@ def file_md5_generator(file_path: str) -> str:
     return hashlib.md5(data).hexdigest()
 
 
-def find_all_duplicate_files(config: ScanConfig) -> dict[str, list[dict]]:
+def find_all_duplicate_files(config: ScanConfig, on_progress=None) -> dict[str, list[dict]]:
     '''Find all duplicate files in a directory tree by comparing MD5 hashes.
 
     Recursively walks the directory specified in config.root_dir. For each
@@ -87,7 +87,9 @@ def find_all_duplicate_files(config: ScanConfig) -> dict[str, list[dict]]:
     scan can be resumed if interrupted.
 
     Parameters:
-        config: A ScanConfig instance with root_dir, resume, and filter fields.
+        config:      A ScanConfig instance with root_dir, resume, and filter fields.
+        on_progress: Optional callback called with (file_path) after each file
+                     is processed. Use this to drive a progress bar.
 
     Returns:
         A dict keyed by MD5 hash. Each value is a list of file info dicts
@@ -138,6 +140,9 @@ def find_all_duplicate_files(config: ScanConfig) -> dict[str, list[dict]]:
             if curr_md5 not in md5_groups:
                 md5_groups[curr_md5] = []
             md5_groups[curr_md5].append(file_info)
+
+            if on_progress is not None:
+                on_progress(filename)
 
     except KeyboardInterrupt:
         logging.info('Scan interrupted. Progress has been saved to checkpoint.')

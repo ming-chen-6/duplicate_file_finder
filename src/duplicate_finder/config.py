@@ -18,6 +18,8 @@ class ScanConfig:
         max_size_unit:      Unit for max_size — "KB", "MB", or "GB".
         min_size:           Minimum file size to scan, or None for no limit.
         min_size_unit:      Unit for min_size — "KB", "MB", or "GB".
+        default_keep_rule:  Which file to KEEP in each duplicate group —
+                            "oldest", "newest", "shortest_path", or "first_found".
 
     Raises:
         ValueError: If both ignore_extensions and only_extensions are set.
@@ -31,6 +33,7 @@ class ScanConfig:
     max_size_unit: str = 'MB'
     min_size: float = None
     min_size_unit: str = 'KB'
+    default_keep_rule: str = 'oldest'
 
     def __post_init__(self):
         if self.ignore_extensions is not None and self.only_extensions is not None:

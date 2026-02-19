@@ -1,0 +1,17 @@
+__pycache__/
+*.py[cod]
+*.pyo
+*.egg-info/
+dist/
+build/
+*.egg
+.eggs/
+*.so
+.env
+.venv/
+env/
+venv/
+.ipynb_checkpoints/
+.claude/
+.dupfinder_cache.db
+duplicate_report.txt

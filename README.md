@@ -41,7 +41,7 @@ Open `duplicate_finder.ipynb` and run cells top-to-bottom:
 | `root_dir` | `str` | *(required)* | Directory to scan. Needs a trailing slash. |
 | `resume` | `bool` | `False` | Resume a previous scan from checkpoint. |
 | `report_path` | `str` | `"duplicate_report.txt"` | Path for the generated report file. |
-| `delete_mode` | `str` | `"trash"` | `"trash"` or `"permanent"` (notebook only). |
+| `delete_mode` | `str` | `"trash"` | `"trash"` or `"permanent"` (notebook only). *** Warning: permanent is irreversible ***|
 | `default_keep_rule` | `str` | `"oldest"` | Which file to KEEP per group (see below). |
 | `ignore_extensions` | `list[str]` | `None` | Extensions to skip (see Scan Filters). |
 | `only_extensions` | `list[str]` | `None` | Extensions to scan exclusively (see Scan Filters). |
